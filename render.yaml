@@ -2,10 +2,12 @@ services:
   - type: web
     name: n8n
     env: docker
-    region: frankfurt # optional (defaults to oregon)
-    plan: free # optional (defaults to starter)
-    branch: main # optional (defaults to master)
+    region: frankfurt
+    plan: free
+    branch: main
     numInstances: 1
+    # 👇 On dit à Render d'écouter sur le port 5678 du conteneur
+    port: 5678
     healthCheckPath: /healthz
     envVars:
       - key: DB_TYPE
@@ -30,10 +32,24 @@ services:
         fromDatabase:
           name: n8nDB
           property: password
+
+      # 👇 STABILISATION DE LA BASE DE DONNÉES (Évite les timeouts au démarrage)
+      - key: DB_POSTGRESDB_TIMEOUT
+        value: "60000"
+      - key: DB_POSTGRESDB_CONNECTION_TIMEOUT
+        value: "60000"
+
+      # 👇 REGLAGES MÉMOIRE & RESEAU (Empêche le crash RAM)
       - key: NODE_OPTIONS
         value: --max-old-space-size=340
+      - key: N8N_PORT
+        value: "5678"
       - key: PORT
-        value: 5678
+        value: "5678"
+      - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+        value: "false"
+
+      # Vos autres configurations d'environnement
       - key: N8N_LOG_LEVEL
         value: info
       - key: GENERIC_TIMEZONE
@@ -44,10 +60,13 @@ services:
         value: fr
       - key: N8N_ENCRYPTION_KEY
         generateValue: true 
+
+      # 👇 Modifiable directement via l'interface Render après le premier build
       - key: WEBHOOK_URL
         value: CHANGE_ME
+        sync: false
 
 databases:
   - name: n8nDB
-    region: frankfurt # optional (defaults to oregon)
+    region: frankfurt
     plan: free
