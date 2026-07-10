@@ -43,7 +43,7 @@ services:
       - key: N8N_ENCRYPTION_KEY
         generateValue: true 
       - key: WEBHOOK_URL
-        value: https://remplace-moi-avec-ton-url-render.onrender.com/
+        value: CHANGE_ME
 
 databases:
   - name: n8nDB
