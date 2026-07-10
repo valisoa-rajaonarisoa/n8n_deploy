@@ -6,8 +6,8 @@ services:
     plan: free
     branch: main
     numInstances: 1
-    # 👇 On dit à Render d'écouter sur le port 5678 du conteneur
-    port: 5678
+    # 👇 CORRECTION : C'est dockerPort et non port pour les environnements Docker
+    dockerPort: 5678
     healthCheckPath: /healthz
     envVars:
       - key: DB_TYPE
