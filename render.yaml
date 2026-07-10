@@ -22,7 +22,7 @@ services:
           name: n8n-db
           property: connectionString
       - key: WEBHOOK_URL
-        value: https://remplace-moi-avec-ton-url-render.onrender.com/
+        value: https://n8n-deploy-xayz.onrender.com/
         sync: false
 
 databases:
