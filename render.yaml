@@ -41,9 +41,7 @@ services:
       - key: N8N_DEFAULT_LOCALE
         value: fr
       - key: N8N_ENCRYPTION_KEY
-        generateValue: true 
-      - key: WEBHOOK_URL
-        value: CHANGE_ME
+        generateValue: true
 
 databases:
   - name: n8nDB
