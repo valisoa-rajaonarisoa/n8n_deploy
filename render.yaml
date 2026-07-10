@@ -3,14 +3,18 @@ services:
     name: n8n-service
     runtime: docker
     plan: free
+    # 👇 On dit à Render d'envoyer le trafic web sur le port 5678 du conteneur
+    port: 5678
     envVars:
       - key: NODE_ENV
         value: production
+      # 👇 On force n8n à démarrer sur le port 5678
+      - key: N8N_PORT
+        value: 5678
       - key: GENERIC_TIMEZONE
         value: Europe/Paris
       - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
         value: "false"
-      # 👇 AJOUTE CETTE LIGNE (Limite Node.js à ~340Mo de RAM pour laisser de la marge au système)
       - key: NODE_OPTIONS
         value: --max-old-space-size=340
       - key: DB_POSTGRESDB_CONNECTION_STRING
