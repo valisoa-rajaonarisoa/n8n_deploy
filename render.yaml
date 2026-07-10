@@ -64,7 +64,6 @@ services:
       # 👇 Modifiable directement via l'interface Render après le premier build
       - key: WEBHOOK_URL
         value: CHANGE_ME
-        sync: false
 
 databases:
   - name: n8nDB
